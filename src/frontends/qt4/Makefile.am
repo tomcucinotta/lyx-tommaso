@@ -50,6 +50,13 @@ AM_CPPFLAGS += \
 	$(QT_INCLUDES) \
 	$(BOOST_INCLUDES) $(ICONV_INCLUDES) $(ZLIB_INCLUDES)
 
+if USE_QXMPP
+CHAT_CPP = GuiChat.cpp GuiBuddies.cpp GuiChatMessenger.cpp
+CHAT_MOC = GuiChat.h GuiBuddies.h GuiChatMessenger.h
+CHAT_UI = ChatUi.ui BuddiesUi.ui
+AM_CPPFLAGS += $(QXMPP_CFLAGS)
+endif
+
 SOURCEFILES = \
 	ButtonPolicy.cpp \
 	ButtonPolicy.h \
@@ -59,6 +66,7 @@ SOURCEFILES = \
 	BulletsModule.cpp \
 	ButtonController.cpp \
 	CategorizedCombo.cpp \
+	$(CHAT_CPP) \
 	ColorCache.cpp \
 	CustomizedWidgets.cpp \
 	DialogView.cpp \
@@ -179,6 +187,7 @@ MOCHEADER = \
 	Action.h \
 	BulletsModule.h \
 	CategorizedCombo.h \
+	$(CHAT_MOC) \
 	CustomizedWidgets.h \
 	DialogView.h \
 	DockView.h \
@@ -278,6 +287,7 @@ UIFILES = \
 	BulletsUi.ui \
 	ChangesUi.ui \
 	CharacterUi.ui \
+	$(CHAT_UI) \
 	CitationUi.ui \
 	ColorUi.ui \
 	CompareUi.ui \

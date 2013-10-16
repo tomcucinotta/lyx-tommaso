@@ -116,7 +116,9 @@
 #include <QToolBar>
 #include <QUrl>
 
-
+#ifdef USE_QXMPP
+#include "GuiChatMessenger.h"
+#endif
 
 // sync with GuiAlert.cpp
 #define EXPORT_in_THREAD 1
@@ -276,6 +278,9 @@ public:
 		: gv_(gv), current_work_area_(0), current_main_work_area_(0),
 		layout_(0), autosave_timeout_(5000),
 		in_show_(false)
+#ifdef USE_QXMPP
+		, p_chat_messenger_(0)
+#endif
 	{
 		// hardcode here the platform specific icon size
 		smallIconSize = 16;  // scaling problems
@@ -477,6 +482,11 @@ public:
 
 	///
 	TocModels toc_models_;
+
+#ifdef USE_QXMPP
+	///
+	GuiChatMessenger *p_chat_messenger_;
+#endif
 
 	///
 	QFutureWatcher<docstring> autosave_watcher_;
@@ -887,6 +897,16 @@ TocModels & GuiView::tocModels()
 {
 	return d.toc_models_;
 }
+
+
+#ifdef USE_QXMPP
+GuiChatMessenger & GuiView::chatMessenger()
+{
+	if (!d.p_chat_messenger_)
+		d.p_chat_messenger_ = new GuiChatMessenger();
+	return *d.p_chat_messenger_;
+}
+#endif
 
 
 void GuiView::setFocus()
@@ -1948,6 +1968,10 @@ bool GuiView::getStatus(FuncRequest const & cmd, FuncStatus & flag)
 				|| name == "prefs"
 				|| name == "texinfo"
 				|| name == "progress"
+#ifdef USE_QXMPP
+				|| name == "chat-buddies"
+				|| name == "chat-bar"
+#endif
 				|| name == "compare";
 		else if (name == "character" || name == "symbols"
 			|| name == "mathdelimiter" || name == "mathmatrix") {
@@ -2106,6 +2130,11 @@ bool GuiView::getStatus(FuncRequest const & cmd, FuncStatus & flag)
 		flag.setOnOff(lyxrc.spellcheck_continuously);
 		break;
 
+#ifdef USE_QXMPP
+	case LFUN_LYX_CHAT:
+		// Nothing to check.
+		break;
+#endif
 	default:
 		return false;
 	}
@@ -3882,6 +3911,15 @@ void GuiView::dispatch(FuncRequest const & cmd, DispatchResult & dr)
 			break;
 		}
 
+#ifdef USE_QXMPP
+		case LFUN_LYX_CHAT:
+			if (!isDialogVisible("chat-bar"))
+				showDialog("chat-bar", string());
+			if (!isDialogVisible("chat-buddies"))
+				showDialog("chat-buddies", string());
+			break;
+#endif
+
 		case LFUN_MESSAGE:
 			dr.setMessage(cmd.argument());
 			break;
@@ -4222,6 +4260,9 @@ namespace {
 char const * const dialognames[] = {
 
 "aboutlyx", "bibitem", "bibtex", "box", "branch", "changes", "character",
+#ifdef USE_QXMPP
+"chat-buddies", "chat-bar",
+#endif
 "citation", "compare", "comparehistory", "document", "errorlist", "ert",
 "external", "file", "findreplace", "findreplaceadv", "float", "graphics",
 "href", "include", "index", "index_print", "info", "listings", "label", "line",
@@ -4409,6 +4450,10 @@ Dialog * createGuiAbout(GuiView & lv);
 Dialog * createGuiBibtex(GuiView & lv);
 Dialog * createGuiChanges(GuiView & lv);
 Dialog * createGuiCharacter(GuiView & lv);
+#ifdef USE_QXMPP
+Dialog * createGuiChat(GuiView & lv);
+Dialog * createGuiBuddies(GuiView & lv);
+#endif
 Dialog * createGuiCitation(GuiView & lv);
 Dialog * createGuiCompare(GuiView & lv);
 Dialog * createGuiCompareHistory(GuiView & lv);
@@ -4461,6 +4506,12 @@ Dialog * GuiView::build(string const & name)
 		return createGuiChanges(*this);
 	if (name == "character")
 		return createGuiCharacter(*this);
+#ifdef USE_QXMPP
+	if (name == "chat-buddies")
+		return createGuiBuddies(*this);
+	if (name == "chat-bar")
+		return createGuiChat(*this);
+#endif
 	if (name == "citation")
 		return createGuiCitation(*this);
 	if (name == "compare")

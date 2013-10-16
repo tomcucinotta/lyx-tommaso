@@ -567,6 +567,87 @@ msgstr "Pridajte novú vetvu do listiny"
 msgid "Define or change background color"
 msgstr "Určiť alebo zmeniť farbu pozadia"
 
+#: src/frontends/qt4/ui/BuddiesUi.ui:35
+msgid "My friends"
+msgstr "Kamoši"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:41
+msgid "Add a friend by its ID"
+msgstr "Pridať kamaráta cez jeho ID"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:44
+msgid "Add"
+msgstr "Pridať"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:51
+msgid "Delete the selected friend and unsubscribe from his status"
+msgstr "Vymazať označeného kamaráta a vypíšte sa z jeho stavu"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:54
+msgid "Delete"
+msgstr "Zmazať"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:67
+msgid ""
+"My friends list. If empty, then try adding a few friends through the Add "
+"button."
+msgstr ""
+"Zoznam mojich kamarátov. Keď je prázdny, pokúste pridať si niekoľko kamošov "
+"tlačidlom 'Pridať'."
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:83
+msgid "My status"
+msgstr "Môj Stav"
+
+# Own xmpp ID, like "anton@jabber.org"
+#: src/frontends/qt4/ui/BuddiesUi.ui:97
+msgid "Id:"
+msgstr "Id:"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:107
+msgid "My ID (in the form of username@domain)"
+msgstr "Vlastné ID (vo forme užívateľ@doména)"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:118
+msgid "Connect to server"
+msgstr "Spojiť so serverom"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:121
+msgid "Connect"
+msgstr "Pripojiť"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:128
+msgid "Disconnect from server and terminate any network activity"
+msgstr "Odpojiť od servera a skončiť so sieťovou aktivitou"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:131
+msgid "Disconnect"
+msgstr "Odpojiť"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:140 src/frontends/qt4/GuiBuddies.cpp:220
+msgid "Disconnected"
+msgstr "Odpojené"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:153
+msgid "Set my published availability status"
+msgstr "Nasadiť štatus mojej publikovanej dosiahnuteľnoti"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:160
+msgid "Available"
+msgstr "Dostupné"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:169
+msgid "Away"
+msgstr "Preč"
+
+#: src/frontends/qt4/ui/BuddiesUi.ui:178
+msgid "Do Not Disturb"
+msgstr "Nerušiť"
+
+#: src/frontends/qt4/ui/BulletsUi.ui:34
+msgid "&Font:"
+msgstr "&Písmo:"
+
 #: src/frontends/qt4/ui/BranchesUi.ui:126
 #: src/frontends/qt4/ui/IndicesUi.ui:185
 msgid "Alter Co&lor..."
@@ -818,6 +899,10 @@ msgstr "&Jazyk:"
 #: src/frontends/qt4/ui/CharacterUi.ui:161
 msgid "&Series:"
 msgstr "&Séria:"
+
+#: src/frontends/qt4/GuiChat.cpp:249
+msgid "LyX Chat Message Window"
+msgstr "LyX Chat: Protokolové Okno"
 
 #: src/frontends/qt4/ui/CharacterUi.ui:177
 msgid "&Color:"

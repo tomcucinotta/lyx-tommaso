@@ -51,6 +51,10 @@ class TabWorkArea;
 class TocModels;
 class ToolbarInfo;
 
+#ifdef USE_QXMPP
+class GuiChatMessenger;
+#endif
+
 /**
  * GuiView - Qt main LyX window
  *
@@ -173,6 +177,11 @@ public:
 	///
 	TocModels & tocModels();
 	
+#ifdef USE_QXMPP
+	///
+	GuiChatMessenger & chatMessenger();
+#endif
+
 	/// called on timeout
 	void autoSave();
 
@@ -346,6 +355,8 @@ public:
 	void hideDialog(std::string const & name, Inset * inset);
 	///
 	void disconnectDialog(std::string const & name);
+	///
+	Dialog * findOrBuild(std::string const & name, bool hide_it);
 
 private:
 	/// Saves the layout and geometry of the window
@@ -431,8 +442,6 @@ private:
 
 	/// Is the dialog currently visible?
 	bool isDialogVisible(std::string const & name) const;
-	///
-	Dialog * findOrBuild(std::string const & name, bool hide_it);
 	///
 	Dialog * build(std::string const & name);
 	///

@@ -196,6 +196,7 @@ LexerKeyword lyxrcTags[] = {
 	{ "\\use_system_colors", LyXRC::RC_USE_SYSTEM_COLORS },
 	{ "\\use_system_theme_icons", LyXRC::RC_USE_SYSTEM_THEME_ICONS },
 	{ "\\use_tooltip", LyXRC::RC_USE_TOOLTIP },
+	{ "\\user_chat_id", LyXRC::RC_USER_CHAT_ID },
 	{ "\\user_email", LyXRC::RC_USER_EMAIL },
 	{ "\\user_name", LyXRC::RC_USER_NAME },
 	{ "\\view_dvi_paper_option", LyXRC::RC_VIEWDVI_PAPEROPTION },
@@ -1098,6 +1099,9 @@ LyXRC::ReturnValues LyXRC::read(Lexer & lexrc, bool check_format)
 			lexrc >> preview_scale_factor;
 			break;
 
+		case RC_USER_CHAT_ID:
+			lexrc >> user_chat_id;
+			break;
 		case RC_USER_NAME:
 			lexrc >> user_name;
 			break;
@@ -1524,6 +1528,11 @@ void LyXRC::write(ostream & os, bool ignore_system_lyxrc, string const & name) c
 			os << "\\date_insert_format \"" << date_insert_format
 			   << "\"\n";
 		}
+		if (tag != RC_LAST)
+			break;
+
+	case RC_USER_CHAT_ID:
+		os << "\\user_chat_id \"" << user_chat_id << "\"\n";
 		if (tag != RC_LAST)
 			break;
 
@@ -2830,6 +2839,7 @@ void actOnUpdatedPrefs(LyXRC const & lyxrc_orig, LyXRC const & lyxrc_new)
 	case LyXRC::RC_TEXINPUTS_PREFIX:
 	case LyXRC::RC_THESAURUSDIRPATH:
 	case LyXRC::RC_UIFILE:
+	case LyXRC::RC_USER_CHAT_ID:
 	case LyXRC::RC_USER_EMAIL:
 	case LyXRC::RC_USER_NAME:
 	case LyXRC::RC_USE_CONVERTER_CACHE:
@@ -3222,6 +3232,9 @@ string const LyXRC::getDescription(LyXRCTags tag)
 
 	case RC_UIFILE:
 		str = _("The UI (user interface) file. Can either specify an absolute path, or LyX will look in its global and local ui/ directories.");
+		break;
+
+	case RC_USER_CHAT_ID:
 		break;
 
 	case RC_USER_EMAIL:

@@ -146,6 +146,7 @@ LYX_COMBO(USE_QT            "Use Qt version as frontend" QT4 QT5)
 LYX_OPTION(EXTERNAL_Z       "Build 3rdparty lib zlib" ON ALL)
 LYX_OPTION(EXTERNAL_ICONV   "Build 3rdparty lib iconvlib" ON ALL)
 LYX_OPTION(EXTERNAL_HUNSPELL "Build 3rdparty lib hunspelllib" ON ALL)
+LYX_OPTION(USE_QXMPP        "Enable qxmpp chats with lyx" OFF ALL)
 
 # GCC specific
 LYX_OPTION(PROFILE              "Build profile version" OFF GCC)
@@ -717,6 +718,11 @@ if(NOT PYTHONINTERP_FOUND)
 endif()
 
 set(LYX_PYTHON_EXECUTABLE ${PYTHON_EXECUTABLE} CACHE FILEPATH "Python to be used by LyX")
+
+if(LYX_USE_QXMPP)
+  find_package(LibQxmpp REQUIRED)
+  include_directories(${LIBQXMPP_INCLUDEDIR})
+endif()
 
 if(LYX_NLS)
 	find_package(LyXGettext)

@@ -16,6 +16,18 @@ list(REMOVE_ITEM frontends_qt_sources ${TOP_SRC_DIR}/src/frontends/qt4/Resources
 file(GLOB frontends_qt_headers ${TOP_SRC_DIR}/src/frontends/qt4/${LYX_HPP_FILES})
 file(GLOB frontend_qt_UI ${TOP_SRC_DIR}/src/frontends/qt4/ui/*.ui)
 
+if(NOT LYX_USE_QXMPP)
+  foreach(_f GuiChat.cpp GuiBuddies.cpp GuiChatMessenger.cpp)
+    list(REMOVE_ITEM frontends_qt4_sources "${TOP_SRC_DIR}/src/frontends/qt4/${_f}")
+  endforeach()
+  foreach(_f GuiChat.h GuiBuddies.h GuiChatMessenger.h)
+    list(REMOVE_ITEM frontends_qt4_headers "${TOP_SRC_DIR}/src/frontends/qt4/${_f}")
+  endforeach()
+  foreach(_f ChatUi.ui BuddiesUi.ui)
+    list(REMOVE_ITEM frontend_qt4_UI "${TOP_SRC_DIR}/src/frontends/qt4/${_f}")
+  endforeach()
+endif()
+
 lyx_add_msvc_pch(frontends_qt4)
 
 lyx_automoc(${frontends_qt_sources})

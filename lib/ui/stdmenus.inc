@@ -583,6 +583,7 @@ Menuset
 		OptItem "Check TeX|h" "buffer-chktex"
 		Item "TeX Information|I" "dialog-show texinfo"
 		Item "Compare...|C" "dialog-show compare"
+		OptItem "LyX Chat|y" "lyx-chat"
 		Separator
 # A LOT of applications have Tools->Prefs. Remember this
 # should be rarely used - Edit menu is not a good place to

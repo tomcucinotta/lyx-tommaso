@@ -93,6 +93,10 @@ ${Include_used_spellchecker}
 
 // Define to 1 if std::call_once is supported by the compiler
 #cmakedefine LYX_USE_STD_CALL_ONCE 1
+#cmakedefine LYX_USE_QXMPP 1
+#ifdef LYX_USE_QXMPP
+#define USE_QXMPP 1
+#endif
 
 #endif // config.h guard
 

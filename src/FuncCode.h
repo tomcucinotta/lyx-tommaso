@@ -467,6 +467,9 @@ enum FuncCode
 	LFUN_TABULAR_FEATURE,           // gm, 20151210
 	LFUN_BRANCH_INVERT,             // rgheck, 20160712
 	LFUN_LYX_ACTIVATE,              // skostysh, 20160804
+#ifdef USE_QXMPP
+	LFUN_LYX_CHAT,			// tommaso, 20161008
+#endif
 	LFUN_LASTACTION                 // end of the table
 };
 

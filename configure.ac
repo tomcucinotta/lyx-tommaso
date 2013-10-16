@@ -221,6 +221,8 @@ AC_FUNC_SELECT_ARGTYPES
 
 LYX_CHECK_SPELL_ENGINES
 
+LYX_CHECK_QXMPP
+
 lyx_client_subdir=true
 dnl AC_LANG_PUSH(C)
 dnl LIBS already contains some X extra libs that may interfere.

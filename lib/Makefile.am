@@ -213,7 +213,7 @@ dist_plexamples_DATA = \
 pt_BRexamplesdir = $(pkgdatadir)/examples/pt_BR
 dist_pt_BRexamples_DATA = \
 	examples/pt_BR/splash.lyx
-	
+
 pt_PTexamplesdir = $(pkgdatadir)/examples/pt_PT
 dist_pt_PTexamples_DATA = \
 	examples/pt_PT/splash.lyx
@@ -581,6 +581,8 @@ dist_images_DATA2X = \
 
 dist_images_DATA = \
 	images/amssymb.png \
+	images/available.png \
+	images/away.png \
 	images/banner.png \
 	images/psnfss1.png \
 	images/psnfss2.png \
@@ -2487,4 +2489,3 @@ alltests: check alltests-recursive
 
 alltests-recursive:
 	cd lyx2lyx; $(MAKE) alltests-recursive
-

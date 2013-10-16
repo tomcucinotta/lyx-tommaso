@@ -164,6 +164,7 @@ public:
 		RC_THESAURUSDIRPATH,
 		RC_UIFILE,
 		RC_USELASTFILEPOS,
+		RC_USER_CHAT_ID,
 		RC_USER_EMAIL,
 		RC_USER_NAME,
 		RC_USE_CONVERTER_CACHE,
@@ -420,6 +421,8 @@ public:
 	bool preview_hashed_labels;
 	///
 	double preview_scale_factor;
+	/// user default chat (xmpp) id
+	std::string user_chat_id;
 	/// user name
 	std::string user_name;
 	/// user email

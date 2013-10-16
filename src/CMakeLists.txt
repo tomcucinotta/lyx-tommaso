@@ -129,8 +129,11 @@ target_link_libraries(${_lyx}
 	graphics
 	support
 	${ICONV_LIBRARY}
-	${LYX_QTMAIN_LIBRARY}
+	${QT_QTMAIN_LIBRARY}
 	${vld_dll})
+if(LYX_USE_QXMPP)
+  target_link_libraries(${_lyx} ${LIBQXMPP_LIBRARIES})
+endif()
 
 qt_use_modules(${_lyx} Core Gui)
 

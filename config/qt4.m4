@@ -42,10 +42,10 @@ AC_DEFUN([QT_CHECK_COMPILE],
 				break;
 			fi
 		done
-		qt_cv_libname=
-		for libname in $qt_guilibs \
-		               '-framework QtCore -framework QtConcurrent -framework QtSvg -framework QtWidgets -framework QtMacExtras -framework QtGui'\
-		               '-framework QtCore -framework QtGui'
+		qt4_cv_libname=
+		for libname in '-lQtCore -lQtGui -lQtNetwork -lQtXml' \
+		               '-lQtCore4 -lQtGui4 -lQtNetwork4 -lQtXml4' \
+		               '-framework QtCore -framework QtGui -framework QtConcurrent -framework QtWidgets'
 		do
 			QT_TRY_LINK($libname)
 			if test -n "$qt_cv_libname"; then

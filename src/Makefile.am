@@ -39,6 +39,10 @@ lyx_LDADD = \
 	$(QT_LDFLAGS) \
 	$(QT_LIB)
 
+if USE_QXMPP
+lyx_LDADD += $(QXMPP_LIBS)
+endif
+
 if LYX_WIN_RESOURCE
 .rc.o:
 	cp $(top_srcdir)/development/Win32/packaging/icons/lyx_*32x32.ico .
@@ -188,7 +192,8 @@ SOURCEFILESCORE = \
 	VCBackend.cpp \
 	version.cpp \
 	VSpace.cpp \
-	WordList.cpp
+	WordList.cpp \
+	moc_BufferView.cpp
 
 HEADERFILESCORE = \
 	Author.h \

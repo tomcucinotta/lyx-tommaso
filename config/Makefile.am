@@ -6,4 +6,5 @@ EXTRA_DIST = \
 	lyxpython.m4 \
 	pkg.m4 \
 	qt4.m4 \
-	spell.m4
+	spell.m4 \
+	qxmpp.m4

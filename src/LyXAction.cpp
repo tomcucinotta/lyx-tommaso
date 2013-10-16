@@ -2827,7 +2827,7 @@ void LyXAction::init()
  * \var lyx::FuncCode lyx::LFUN_DIALOG_SHOW
  * \li Action: Shows hidden dialog or creates new one for a given function/inset settings etc.
  * \li Syntax: dialog-show <NAME> [<DATA>]
- * \li Params: <NAME>: aboutlyx|bibitem|bibtex|box|branch|changes|character|citation|\n
+ * \li Params: <NAME>: aboutlyx|bibitem|bibtex|box|branch|changes|character|chat-buddies|chat-bar|citation|\n
                compare|document|errorlist|ert|external|file|findreplace|findreplaceadv|float|\n
                graphics|href|include|index|index_print|info|label|line|listings|log|mathdelimiter|\n
                mathmatrix|mathspace|nomenclature|nomencl_print|note|paragraph|phantom|prefs|\n
@@ -2840,6 +2840,14 @@ void LyXAction::init()
  * \endvar
  */
 		{ LFUN_DIALOG_SHOW, "dialog-show", NoBuffer, Edit },
+#ifdef USE_QXMPP
+/*!
+ * \var lyx::FuncCode lyx::LFUN_LYX_CHAT
+ * \li Action: Shows the LyX Chat dialogs (and creates them if needed)
+ * \endvar
+ */
+		{ LFUN_LYX_CHAT, "lyx-chat", NoBuffer, Edit },
+#endif
 /*!
  * \var lyx::FuncCode lyx::LFUN_DIALOG_SHOW_NEW_INSET
  * \li Action: Shows hidden dialog or create new one for a given inset settings etc.
