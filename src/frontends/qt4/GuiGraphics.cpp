@@ -24,6 +24,7 @@
 #include "LengthCombo.h"
 #include "Length.h"
 #include "LyXRC.h"
+#include "Format.h"
 
 #include "graphics/epstools.h"
 #include "graphics/GraphicsCache.h"
@@ -42,6 +43,7 @@
 #include "support/types.h"
 
 #include <QCheckBox>
+#include <QFileDialog>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
@@ -248,6 +250,12 @@ GuiGraphics::GuiGraphics(GuiView & lv)
 void GuiGraphics::change_adaptor()
 {
 	changed();
+	string const fname = fromqstr(filename->text());
+	FileName dest_fname(FileName(fromqstr(bufferFilePath())), fname);
+	Format const * fmt = formats.getFormat(formats.getFormatFromFile(dest_fname));
+	LYXERR(Debug::GRAPHICS, "fmt: " << fmt << ", fmt_name: " << formats.getFormatFromFile(dest_fname));
+	editPB->setEnabled(!fname.empty() && !dest_fname.isDirectory() && dest_fname.exists());
+	chooseSamplePB->setEnabled(!fname.empty() && !dest_fname.isDirectory());
 }
 
 
