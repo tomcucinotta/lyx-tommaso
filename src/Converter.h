@@ -70,6 +70,8 @@ public:
 	///
 	bool need_aux() const { return need_aux_; }
 	///
+	bool need_auth() const { return need_auth_; }
+	///
 	bool nice() const { return nice_; }
 	///
 	std::string const result_dir() const { return result_dir_; }
@@ -77,6 +79,7 @@ public:
 	std::string const result_file() const { return result_file_; }
 	///
 	std::string const parselog() const { return parselog_; }
+
 private:
 	///
 	trivstring from_;
@@ -101,6 +104,8 @@ private:
 	bool need_aux_;
 	/// we need a "nice" file from the backend, c.f. OutputParams.nice.
 	bool nice_;
+	/// Use of this converter needs explicit user authorization
+	bool need_auth_;
 	/// If the converter put the result in a directory, then result_dir
 	/// is the name of the directory
 	trivstring result_dir_;
@@ -181,6 +186,7 @@ public:
 	const_iterator end() const { return converterlist_.end(); }
 	///
 	void buildGraph();
+
 private:
 	///
 	FormatList const
@@ -210,6 +216,8 @@ private:
 		  bool copy);
 	///
 	Graph G_;
+	/// set of files authorized for external conversion
+	std::set<std::string> auth_files;
 };
 
 /// The global instance.

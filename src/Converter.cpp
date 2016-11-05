@@ -100,7 +100,7 @@ Converter::Converter(string const & f, string const & t,
 		     string const & c, string const & l)
 	: from_(f), to_(t), command_(c), flags_(l),
 	  From_(0), To_(0), latex_(false), xml_(false),
-	  need_aux_(false), nice_(false)
+	  need_aux_(false), nice_(false), need_auth_(false)
 {}
 
 
@@ -128,6 +128,8 @@ void Converter::readFlags()
 			parselog_ = flag_value;
 		else if (flag_name == "nice")
 			nice_ = true;
+		else if (flag_name == "needauth")
+			need_auth_ = true;
 	}
 	if (!result_dir_.empty() && result_file_.empty())
 		result_file_ = "index." + formats.extension(to_);
@@ -400,6 +402,29 @@ bool Converters::convert(Buffer const * buffer,
 			else
 				outfile = FileName(addName(package().temp_dir().absFileName(),
 						   "tmpfile.out"));
+		}
+
+		if (conv.need_auth()) {
+			static const char securityWarning[] = "LyX is about to run converter '%1$s' which is launching an external program that normally acts as a picture/format converter. However, this external program is known to be able to execute arbitrary actions on the system, including dangerous ones such as deleting files, if instructed to do so by a maliciously crafted .lyx document.\n Would you like to proceed?\nAnswer Yes only if you trust the source/sender of the .lyx document!";
+			int choice;
+			if (buffer) {
+				std::string const & fname = buffer->filePath();
+				if (auth_files.find(fname) == auth_files.end()) {
+					choice = frontend::Alert::prompt(
+						 _("Launch of external converter needs user authorization"), bformat(_(securityWarning), from_utf8(conv.command())),
+						0, 0, _("&No"), _("&Yes"), _("Yes, &and do not ask again for document"));
+					if (choice == 2)
+						auth_files.insert(fname);
+				} else {
+					choice = 1;
+				}
+			} else {
+				choice = frontend::Alert::prompt(
+					 _("Need user authorization to launch external converter"), bformat(_(securityWarning), from_utf8(conv.command())),
+					0, 0, _("&No"), _("&Yes"));
+			}
+			if (choice == 0)
+				return false;
 		}
 
 		if (conv.latex()) {

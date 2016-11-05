@@ -15,6 +15,7 @@
 #include "Converter.h"
 #include "Format.h"
 
+#include "frontends/alert.h"
 #include "support/lassert.h"
 #include "support/convert.h"
 #include "support/debug.h"
@@ -370,6 +371,15 @@ static void build_script(string const & from_file,
 			TempFile tempfile(addExtension("gconvertXXXXXX", conv.To()->extension()));
 			tempfile.setAutoRemove(false);
 			outfile = tempfile.name().toFilesystemEncoding();
+		}
+
+		if (conv.need_auth()) {
+			static const char securityWarning[] = "LyX is about to run converter '%1$s' which is launching an external program that normally acts as a picture/format converter. However, this external program is known to be able to execute arbitrary actions on the system, including dangerous ones such as deleting files, if instructed to do so by a maliciously crafted .lyx document.\n Would you like to proceed?\nAnswer Yes only if you trust the source/sender of the .lyx document!";
+			docstring const & question = bformat(from_utf8(securityWarning), from_utf8(conv.command()));
+			int choice = frontend::Alert::prompt(
+				from_utf8("Need user authorization to launch external converter"), question, 0, 0, from_utf8("&No"), from_utf8("&Yes"));
+			if (choice == 0)
+				return;
 		}
 
 		// Store these names in the python script
