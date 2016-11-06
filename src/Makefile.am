@@ -25,7 +25,7 @@ OTHERLIBS = $(BOOST_LIBS) $(MYTHES_LIBS) $(ENCHANT_LIBS) $(HUNSPELL_LIBS) \
 	    $(LIBSHLWAPI) $(LIBPSAPI)
 
 noinst_LIBRARIES = liblyxcore.a
-bin_PROGRAMS = lyx
+bin_PROGRAMS = lyx lyxwrap
 
 lyx_LDADD = \
 	liblyxcore.a \
@@ -99,6 +99,9 @@ lyx_SOURCES = \
 if LYX_WIN_RESOURCE
 lyx_SOURCES += lyxwinres.rc
 endif
+
+lyxwrap_SOURCES = \
+	lyxwrap.cpp
 
 SOURCEFILESCORE = \
 	Author.cpp \

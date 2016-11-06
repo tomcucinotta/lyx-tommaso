@@ -2485,6 +2485,9 @@ install-data-hook:
 			chmod 644 "$(DESTDIR)$(pkgdatadir)/$$i"; \
 		fi; \
 	done
+if INSTALL_POSIX
+	cp usr.bin.lyxwrap /etc/apparmor.d/
+endif
 
 alltests: check alltests-recursive
 

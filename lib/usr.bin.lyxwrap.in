@@ -1,0 +1,15 @@
+# vim:syntax=apparmor
+# Author: Tommaso Cucinotta <tommaso@lyx.org>
+
+#include <tunables/global>
+
+@prefix@/bin/lyxwrap {
+  /tmp/** ixrw,
+  @{HOME}/** ixr,
+  / ixr,
+  /** ixr,
+  deny /etc/security/ xrw,
+  deny /etc/security/** xrw,
+  deny /etc/passwd* xrw,
+  deny /etc/shadow* xrw,
+}

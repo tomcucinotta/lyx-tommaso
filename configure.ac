@@ -387,6 +387,7 @@ AC_CONFIG_FILES([Makefile \
       development/lyx.spec \
       lib/lyx.desktop-temp:lib/lyx.desktop.in
       lib/Makefile \
+      lib/usr.bin.lyxwrap \
       lib/doc/Makefile \
       lib/lyx2lyx/lyx2lyx_version.py \
       lib/lyx2lyx/Makefile \
