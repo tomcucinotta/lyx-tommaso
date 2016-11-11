@@ -168,6 +168,7 @@ public:
 		RC_USER_EMAIL,
 		RC_USER_NAME,
 		RC_USE_CONVERTER_CACHE,
+		RC_USE_CONVERTER_HARDENING,
 		RC_USE_SYSTEM_COLORS,
 		RC_USE_TOOLTIP,
 		RC_USE_PIXMAP_CACHE,
@@ -446,6 +447,8 @@ public:
 	std::string texinputs_prefix;
 	/// Use the cache for file converters?
 	bool use_converter_cache;
+	/// Apply hardening when calling external converters
+	bool use_converter_hardening;
 	/// The maximum age of cache files in seconds
 	unsigned int converter_cache_maxage;
 	/// Sort layouts alphabetically

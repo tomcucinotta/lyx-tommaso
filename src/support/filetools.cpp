@@ -417,7 +417,7 @@ FileName const imageLibFileSearch(string & dir, string const & name,
 }
 
 
-string const commandPrep(string const & command_in)
+static string const commandPrepAux(string const & command_in)
 {
 	static string const token_scriptpath = "$$s/";
 	string const python_call = "python -tt";
@@ -455,6 +455,19 @@ string const commandPrep(string const & command_in)
 	}
 
 	return command;
+}
+
+
+string const commandPrep(string const & cmd)
+{
+	if (os::shell() == os::UNIX && lyxrc.use_converter_hardening) {
+		string const wrap_cmd = string("lyxwrap") + PROGRAM_SUFFIX;
+		lyxerr << "commandPrep(): " + wrap_cmd + " " + commandPrepAux(cmd) << std::endl;
+		return wrap_cmd + " " + commandPrepAux(cmd);
+	} else {
+		lyxerr << "commandPrep(): " + commandPrepAux(cmd) << std::endl;
+		return commandPrepAux(cmd);
+	}
 }
 
 

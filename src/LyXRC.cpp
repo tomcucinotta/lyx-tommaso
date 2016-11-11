@@ -189,6 +189,7 @@ LexerKeyword lyxrcTags[] = {
 	{ "\\thesaurusdir_path", LyXRC::RC_THESAURUSDIRPATH },
 	{ "\\ui_file", LyXRC::RC_UIFILE },
 	{ "\\use_converter_cache", LyXRC::RC_USE_CONVERTER_CACHE },
+	{ "\\use_converter_hardening", LyXRC::RC_USE_CONVERTER_HARDENING },
 	{ "\\use_lastfilepos", LyXRC::RC_USELASTFILEPOS },
 	{ "\\use_pixmap_cache", LyXRC::RC_USE_PIXMAP_CACHE },
 	{ "\\use_qimage", LyXRC::RC_USE_QIMAGE },
@@ -317,6 +318,7 @@ void LyXRC::setDefaults()
 	preview_hashed_labels  = false;
 	preview_scale_factor = 1.0;
 	use_converter_cache = true;
+	use_converter_hardening = true;
 	use_system_colors = false;
 	use_tooltip = true;
 	use_pixmap_cache = false;
@@ -1116,6 +1118,9 @@ LyXRC::ReturnValues LyXRC::read(Lexer & lexrc, bool check_format)
 		case RC_USE_CONVERTER_CACHE:
 			lexrc >> use_converter_cache;
 			break;
+		case RC_USE_CONVERTER_HARDENING:
+			lexrc >> use_converter_hardening;
+			break;
 		case RC_CONVERTER_CACHE_MAXAGE:
 			lexrc >> converter_cache_maxage;
 			break;
@@ -1598,6 +1603,15 @@ void LyXRC::write(ostream & os, bool ignore_system_lyxrc, string const & name) c
 		    use_converter_cache != system_lyxrc.use_converter_cache) {
 			os << "\\use_converter_cache "
 			   << convert<string>(use_converter_cache) << '\n';
+		}
+		if (tag != RC_LAST)
+			break;
+
+	case RC_USE_CONVERTER_HARDENING:
+		if (ignore_system_lyxrc ||
+		    use_converter_hardening != system_lyxrc.use_converter_hardening) {
+			os << "\\use_converter_hardening "
+			   << convert<string>(use_converter_hardening) << '\n';
 		}
 		if (tag != RC_LAST)
 			break;
@@ -2843,6 +2857,7 @@ void actOnUpdatedPrefs(LyXRC const & lyxrc_orig, LyXRC const & lyxrc_new)
 	case LyXRC::RC_USER_EMAIL:
 	case LyXRC::RC_USER_NAME:
 	case LyXRC::RC_USE_CONVERTER_CACHE:
+	case LyXRC::RC_USE_CONVERTER_HARDENING:
 	case LyXRC::RC_USE_SYSTEM_COLORS:
 	case LyXRC::RC_USE_TOOLTIP:
 	case LyXRC::RC_USE_PIXMAP_CACHE:
@@ -2933,6 +2948,10 @@ string const LyXRC::getDescription(LyXRCTags tag)
 		break;
 
 	case RC_CONVERTER:
+		break;
+
+	case RC_CONVERTER_HARDENING:
+		str = _("Apply hardening techniques when calling external converters to prevent undesired effects.");
 		break;
 
 	case RC_COPIER:

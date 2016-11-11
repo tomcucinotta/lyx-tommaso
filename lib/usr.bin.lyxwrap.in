@@ -3,9 +3,18 @@
 
 #include <tunables/global>
 
-@prefix@/bin/lyxwrap {
+@prefix@/bin/lyxwrap@version_suffix@ {
+  #include <abstractions/audio>
+  #include <abstractions/dbus>
+  #include <abstractions/dbus-session>
+  #include <abstractions/dbus-accessibility>
+  #include <abstractions/X>
+  #include <abstractions/gnome>
+  #include <abstractions/nameservice>
+
   /tmp/** ixrw,
   @{HOME}/** ixr,
+  @{HOME}/.lyx@version_suffix@** ixrw,
   / ixr,
   /** ixr,
   deny /etc/security/ xrw,
